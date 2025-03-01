@@ -38,19 +38,13 @@
             .content {
                 margin: 20px 0;
             }
-            table {
-                width: 100%;
-                border-collapse: collapse;
+            .section {
+                margin-bottom: 40px;
             }
-            table, th, td {
-                border: 1px solid #ddd;
-            }
-            th, td {
-                padding: 8px;
-                text-align: left;
-            }
-            th {
+            .section h2 {
                 background-color: #f2f2f2;
+                padding: 10px;
+                border: 1px solid #ddd;
             }
         </style>
     </head>
@@ -67,61 +61,22 @@
                 <a href="#customers">Manage Customers</a>
             </div>
             <div class="content">
-                <section id="movies">
+                <div class="section" id="movies">
                     <h2>Manage Movies</h2>
-                    <table>
-                        <tr>
-                            <th>Movie ID</th>
-                            <th>Title</th>
-                            <th>Genre</th>
-                            <th>Duration</th>
-                            <th>Release Date</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                        <!-- Movie data will be populated here -->
-                    </table>
-                </section>
-                <section id="showtimes">
+                    <p>Here you can add, edit, and delete movies.</p>
+                </div>
+                <div class="section" id="showtimes">
                     <h2>Manage Showtimes</h2>
-                    <table>
-                        <tr>
-                            <th>Showtime ID</th>
-                            <th>Movie ID</th>
-                            <th>Cinema ID</th>
-                            <th>Showtime</th>
-                            <th>Actions</th>
-                        </tr>
-                        <!-- Showtime data will be populated here -->
-                    </table>
-                </section>
-                <section id="bookings">
+                    <p>Here you can add, edit, and delete showtimes.</p>
+                </div>
+                <div class="section" id="bookings">
                     <h2>Manage Bookings</h2>
-                    <table>
-                        <tr>
-                            <th>Booking ID</th>
-                            <th>Customer ID</th>
-                            <th>Showtime ID</th>
-                            <th>Booking Date</th>
-                            <th>Actions</th>
-                        </tr>
-                        <!-- Booking data will be populated here -->
-                    </table>
-                </section>
-                <section id="customers">
+                    <p>Here you can view and manage bookings.</p>
+                </div>
+                <div class="section" id="customers">
                     <h2>Manage Customers</h2>
-                    <table>
-                        <tr>
-                            <th>Customer ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                            <th>Actions</th>
-                        </tr>
-                        <!-- Customer data will be populated here -->
-                    </table>
-                </section>
+                    <p>Here you can view and manage customer information.</p>
+                </div>
             </div>
             <div class="footer">
                 <p>&copy; 2025 Movie Ticket Booking System</p>
