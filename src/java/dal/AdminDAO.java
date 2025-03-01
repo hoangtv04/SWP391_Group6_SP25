@@ -21,7 +21,7 @@ public class AdminDAO extends DBContext {
      * Retrieves all admins from the database
      * @return List of Admin objects
      */
-    public List<Admin> getAllAdmins() {
+    public List<Admin> getAllAdmins() throws Exception {
         List<Admin> admins = new ArrayList<>();
         String sql = "SELECT * FROM Admin";
         try (Connection connection = getConnection();
@@ -47,7 +47,7 @@ public class AdminDAO extends DBContext {
      * @param id Admin ID
      * @return Admin object
      */
-    public Admin getAdminByID(int id) {
+    public Admin getAdminByID(int id) throws Exception {
         String sql = "SELECT * FROM Admin WHERE AdminID=?";
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -72,7 +72,7 @@ public class AdminDAO extends DBContext {
      * @param email Admin email
      * @return Admin object
      */
-    public Admin getAdminByEmail(String email) {
+    public Admin getAdminByEmail(String email) throws Exception {
         String sql = "SELECT * FROM Admin WHERE Email=?";
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -97,7 +97,7 @@ public class AdminDAO extends DBContext {
      * @param name Admin name
      * @return Admin object
      */
-    public Admin getAdminByName(String name) {
+    public Admin getAdminByName(String name) throws Exception {
         String sql = "SELECT * FROM Admin WHERE Name=?";
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -122,7 +122,7 @@ public class AdminDAO extends DBContext {
      * @param password Admin password
      * @return Admin object
      */
-    public Admin getAdminByPassword(String password) {
+    public Admin getAdminByPassword(String password) throws Exception {
         String sql = "SELECT * FROM Admin WHERE Password=?";
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -147,14 +147,14 @@ public class AdminDAO extends DBContext {
      * @param admin Admin object
      * @return true if update was successful, false otherwise
      */
-    public boolean updateAdmin(Admin admin) {
+    public boolean updateAdmin(Admin admin) throws Exception {
         String sql = "UPDATE Admin SET Name=?, Email=?, Password=? WHERE AdminID=?";
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, admin.getName());
             ps.setString(2, admin.getEmail());
             ps.setString(3, admin.getPassword());
-            ps.setInt(4, admin.getId());
+            ps.setInt(4, admin.getAdminId());
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException | ClassNotFoundException ex) {
@@ -177,12 +177,18 @@ public class AdminDAO extends DBContext {
             return rowsAffected > 0;
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
     public static void main(String[] args) {
         AdminDAO dao = new AdminDAO();
-        System.out.println(dao.getAdminByID(1));
+        try {
+            System.out.println(dao.getAdminByID(1));
+        } catch (Exception ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

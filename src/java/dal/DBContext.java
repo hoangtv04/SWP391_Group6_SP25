@@ -11,7 +11,7 @@ import java.sql.DriverManager;
  * @author tovie
  */
 public class DBContext {
-    private final String serverName = "localhost//EXPRESS";
+    private final String serverName = "localhost\\SQLEXPRESS";
     private final String dbName = "MovieTicketBooking";
     private final String portNumber = "1433";
     private final String instance = ""; 
