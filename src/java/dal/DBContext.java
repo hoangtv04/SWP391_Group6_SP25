@@ -9,5 +9,7 @@ package dal;
  * @author Admin
  */
 public class DBContext {
-    
+    public static void main(String[] args) {
+        
+    }
 }
