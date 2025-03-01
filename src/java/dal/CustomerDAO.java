@@ -14,7 +14,14 @@ public class CustomerDAO extends DBContext {
         String query = "SELECT * FROM Customer";
         try (Connection connection = getConnection(); Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
-                customers.add(mapRowToCustomer(rs));
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("CustomerID"));
+                customer.setPhone(rs.getString("Phone"));
+                customer.setCustomerName(rs.getString("CustomerName"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setEmail(rs.getString("Email"));
+                customer.setAddress(rs.getString("Address"));
+                customers.add(customer);
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -28,7 +35,14 @@ public class CustomerDAO extends DBContext {
             stmt.setInt(1, customerId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return mapRowToCustomer(rs);
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("CustomerID"));
+                customer.setPhone(rs.getString("Phone"));
+                customer.setCustomerName(rs.getString("CustomerName"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setEmail(rs.getString("Email"));
+                customer.setAddress(rs.getString("Address"));
+                return customer;
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,7 +56,14 @@ public class CustomerDAO extends DBContext {
             stmt.setString(1, phone);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return mapRowToCustomer(rs);
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("CustomerID"));
+                customer.setPhone(rs.getString("Phone"));
+                customer.setCustomerName(rs.getString("CustomerName"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setEmail(rs.getString("Email"));
+                customer.setAddress(rs.getString("Address"));
+                return customer;
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,7 +77,14 @@ public class CustomerDAO extends DBContext {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return mapRowToCustomer(rs);
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("CustomerID"));
+                customer.setPhone(rs.getString("Phone"));
+                customer.setCustomerName(rs.getString("CustomerName"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setEmail(rs.getString("Email"));
+                customer.setAddress(rs.getString("Address"));
+                return customer;
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,15 +92,70 @@ public class CustomerDAO extends DBContext {
         return null;
     }
 
-    private Customer mapRowToCustomer(ResultSet rs) throws SQLException {
-        Customer customer = new Customer();
-        customer.setCustomerId(rs.getInt("CustomerID"));
-        customer.setPhone(rs.getString("Phone"));
-        customer.setCustomerName(rs.getString("CustomerName"));
-        customer.setPassword(rs.getString("Password"));
-        customer.setEmail(rs.getString("Email"));
-        customer.setAddress(rs.getString("Address"));
-        return customer;
+    public Customer getCustomerByName(String name) throws Exception {
+        String query = "SELECT * FROM Customer WHERE CustomerName = ?";
+        try (Connection connection = getConnection(); PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Customer customer = new Customer();
+                customer.setCustomerId(rs.getInt("CustomerID"));
+                customer.setPhone(rs.getString("Phone"));
+                customer.setCustomerName(rs.getString("CustomerName"));
+                customer.setPassword(rs.getString("Password"));
+                customer.setEmail(rs.getString("Email"));
+                customer.setAddress(rs.getString("Address"));
+                return customer;
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public boolean addCustomer(Customer customer) throws Exception {
+        String query = "INSERT INTO Customer (Phone, CustomerName, Password, Email, Address) VALUES (?, ?, ?, ?, ?)";
+        try (Connection connection = getConnection(); PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, customer.getPhone());
+            stmt.setString(2, customer.getCustomerName());
+            stmt.setString(3, customer.getPassword());
+            stmt.setString(4, customer.getEmail());
+            stmt.setString(5, customer.getAddress());
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean updateCustomer(Customer customer) throws Exception {
+        String query = "UPDATE Customer SET Phone = ?, CustomerName = ?, Password = ?, Email = ?, Address = ? WHERE CustomerID = ?";
+        try (Connection connection = getConnection(); PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, customer.getPhone());
+            stmt.setString(2, customer.getCustomerName());
+            stmt.setString(3, customer.getPassword());
+            stmt.setString(4, customer.getEmail());
+            stmt.setString(5, customer.getAddress());
+            stmt.setInt(6, customer.getCustomerId());
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean deleteCustomer(int customerId) throws Exception {
+        String query = "DELETE FROM Customer WHERE CustomerID = ?";
+        try (Connection connection = getConnection(); PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, customerId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     public static void main(String[] args) {
