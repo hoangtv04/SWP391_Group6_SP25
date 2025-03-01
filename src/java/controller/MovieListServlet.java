@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
 
-import dal.CustomerDAO;
-import model.Customer;
+import dal.MovieDAO;
+import model.Movie;
 import java.io.IOException;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,11 +11,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author tovie
+ * Servlet implementation class MovieListServlet
  */
-@WebServlet(name="CustomerServletController", urlPatterns={"/customer"})
-public class CustomerServletController extends HttpServlet {
+@WebServlet(name="MovieListServlet", urlPatterns={"/movielist"})
+public class MovieListServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,9 +26,20 @@ public class CustomerServletController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        // Create an instance of MovieDAO
+        MovieDAO movieDAO = new MovieDAO();
+        
+        // Retrieve all movies
+        List<Movie> movies = movieDAO.getAllMovies();
+        
+        // Set the list of movies as a request attribute
+        request.setAttribute("movies", movies);
+        
+        // Forward the request to MovieList.jsp
+        request.getRequestDispatcher("/view/MovieList.jsp").forward(request, response);
     } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -57,19 +63,7 @@ public class CustomerServletController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        // Create an instance of CustomerDAO
-        CustomerDAO customerDAO = new CustomerDAO();
-        
-        // Retrieve the customer with ID 1 (for example)
-        Customer customer = customerDAO.getCustomerById(1);
-        
-        // Set the customer as a request attribute
-        request.setAttribute("customer", customer);
-        
-        // Forward the request to CustomerHome.jsp
-        request.getRequestDispatcher("/view/CustomerHome.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 
@@ -79,6 +73,5 @@ public class CustomerServletController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

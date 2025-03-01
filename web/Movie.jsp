@@ -1,10 +1,11 @@
 <%-- 
-    Document   : HomePageMovie
+    Document   : Movie
     Created on : Mar 1, 2025, 11:31:03 PM
     Author     : tovie
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Movie"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +26,7 @@
         <%
             } else {
         %>
-            <p>No movie found with ID 1.</p>
+            <p>No movie found with the specified ID.</p>
         <%
             }
         %>

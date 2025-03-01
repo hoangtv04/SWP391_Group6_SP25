@@ -15,8 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author tovie
+ * Servlet implementation class MovieServletController
  */
 @WebServlet(name="MovieServletController", urlPatterns={"/movie"})
 public class MovieServletController extends HttpServlet {
@@ -31,9 +30,24 @@ public class MovieServletController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        // Get the movie ID from the request
+        String movieIdStr = request.getParameter("id");
+        int movieId = Integer.parseInt(movieIdStr);
+        
+        // Create an instance of MovieDAO
+        MovieDAO movieDAO = new MovieDAO();
+        
+        // Retrieve the movie by ID
+        Movie movie = movieDAO.getMovieById(movieId);
+        
+        // Set the movie as a request attribute
+        request.setAttribute("movie", movie);
+        
+        // Forward the request to Movie.jsp
+        request.getRequestDispatcher("/view/Movie.jsp").forward(request, response);
     } 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -57,19 +71,7 @@ public class MovieServletController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        // Create an instance of MovieDAO
-        MovieDAO movieDAO = new MovieDAO();
-        
-        // Retrieve the movie with ID 1
-        Movie movie = movieDAO.getMovieById(1);
-        
-        // Set the movie as a request attribute
-        request.setAttribute("movie", movie);
-        
-        // Forward the request to HomePageMovie.jsp
-        request.getRequestDispatcher("HomePageMovie.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 
@@ -79,6 +81,5 @@ public class MovieServletController extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
