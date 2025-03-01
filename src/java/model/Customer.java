@@ -9,12 +9,13 @@ package model;
  * @author tovie
  */
 public class Customer {
-     private int customerId;
-     private String phone;
-     private String customerName;
-     private String password;
-     private String email;
-     private String address;
+
+    private int customerId;
+    private String phone;
+    private String customerName;
+    private String password;
+    private String email;
+    private String address;
 
     public Customer() {
     }
@@ -80,6 +81,5 @@ public class Customer {
     public String toString() {
         return "Customer{" + "customerId=" + customerId + ", phone=" + phone + ", customerName=" + customerName + ", password=" + password + ", email=" + email + ", address=" + address + '}';
     }
-     
-     
+
 }
