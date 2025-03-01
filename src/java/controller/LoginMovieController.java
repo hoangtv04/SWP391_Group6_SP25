@@ -46,7 +46,7 @@ public class LoginMovieController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     /**
@@ -81,7 +81,7 @@ public class LoginMovieController extends HttpServlet {
         if (customer != null && customer.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("customer", customer);
-            response.sendRedirect("CustomerHome.jsp"); // Redirect to customer dashboard
+            response.sendRedirect("view/CustomerHome.jsp"); // Redirect to customer dashboard
         } else if (admin != null && admin.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("admin", admin);
