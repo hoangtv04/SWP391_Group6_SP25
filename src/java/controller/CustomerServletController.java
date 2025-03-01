@@ -5,8 +5,8 @@
 
 package controller;
 
-import dal.MovieDAO;
-import model.Movie;
+import dal.CustomerDAO;
+import model.Customer;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,8 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author tovie
  */
-@WebServlet(name="MovieServletController", urlPatterns={"/movie"})
-public class MovieServletController extends HttpServlet {
+@WebServlet(name="CustomerServletController", urlPatterns={"/customer"})
+public class CustomerServletController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -59,17 +59,17 @@ public class MovieServletController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        // Create an instance of MovieDAO
-        MovieDAO movieDAO = new MovieDAO();
+        // Create an instance of CustomerDAO
+        CustomerDAO customerDAO = new CustomerDAO();
         
-        // Retrieve the movie with ID 1
-        Movie movie = movieDAO.getMovieById(1);
+        // Retrieve the customer with ID 1 (for example)
+        Customer customer = customerDAO.getCustomerById(1);
         
-        // Set the movie as a request attribute
-        request.setAttribute("movie", movie);
+        // Set the customer as a request attribute
+        request.setAttribute("customer", customer);
         
-        // Forward the request to HomePageMovie.jsp
-        request.getRequestDispatcher("HomePageMovie.jsp").forward(request, response);
+        // Forward the request to CustomerHome.jsp
+        request.getRequestDispatcher("/view/CustomerHome.jsp").forward(request, response);
     }
 
     /** 
