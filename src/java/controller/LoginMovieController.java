@@ -46,7 +46,7 @@ public class LoginMovieController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("HomePage/Login.jsp").forward(request, response);
+        request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     /**
@@ -88,7 +88,7 @@ public class LoginMovieController extends HttpServlet {
             response.sendRedirect("view/AdminHome.jsp"); // Redirect to admin dashboard
         } else {
             request.setAttribute("errorMessage", "Invalid username or password. Please try again.");
-            request.getRequestDispatcher("HomePage/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
 

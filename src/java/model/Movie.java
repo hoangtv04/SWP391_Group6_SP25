@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author tovie
@@ -13,7 +15,7 @@ public class Movie {
     private String title;
     private String genre;
     private int duration; // Duration in minutes
-    private java.sql.Date releaseDate;
+    private Date releaseDate;
     private String description;
 
     // Default constructor
@@ -21,7 +23,7 @@ public class Movie {
     }
 
     // Parameterized constructor
-    public Movie(int movieId, String title, String genre, int duration, java.sql.Date releaseDate, String description) {
+    public Movie(int movieId, String title, String genre, int duration, Date releaseDate, String description) {
         this.movieId = movieId;
         this.title = title;
         this.genre = genre;
@@ -31,11 +33,11 @@ public class Movie {
     }
 
     // Getters and Setters
-    public int getMovieId() {
+    public int getMovieID() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public void setMovieID(int movieId) {
         this.movieId = movieId;
     }
 
@@ -63,11 +65,11 @@ public class Movie {
         this.duration = duration;
     }
 
-    public java.sql.Date getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(java.sql.Date releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 

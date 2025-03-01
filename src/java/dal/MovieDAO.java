@@ -23,7 +23,7 @@ public class MovieDAO extends DBContext {
         try (Connection connection = getConnection(); Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Movie movie = new Movie();
-                movie.setMovieId(rs.getInt("MovieID"));
+                movie.setMovieID(rs.getInt("MovieID"));
                 movie.setTitle(rs.getString("Title"));
                 movie.setGenre(rs.getString("Genre"));
                 movie.setDuration(rs.getInt("Duration"));
@@ -46,7 +46,7 @@ public class MovieDAO extends DBContext {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Movie movie = new Movie();
-                movie.setMovieId(rs.getInt("MovieID"));
+                movie.setMovieID(rs.getInt("MovieID"));
                 movie.setTitle(rs.getString("Title"));
                 movie.setGenre(rs.getString("Genre"));
                 movie.setDuration(rs.getInt("Duration"));
@@ -69,7 +69,7 @@ public class MovieDAO extends DBContext {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Movie movie = new Movie();
-                movie.setMovieId(rs.getInt("MovieID"));
+                movie.setMovieID(rs.getInt("MovieID"));
                 movie.setTitle(rs.getString("Title"));
                 movie.setGenre(rs.getString("Genre"));
                 movie.setDuration(rs.getInt("Duration"));
@@ -92,7 +92,7 @@ public class MovieDAO extends DBContext {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Movie movie = new Movie();
-                movie.setMovieId(rs.getInt("MovieID"));
+                movie.setMovieID(rs.getInt("MovieID"));
                 movie.setTitle(rs.getString("Title"));
                 movie.setGenre(rs.getString("Genre"));
                 movie.setDuration(rs.getInt("Duration"));
@@ -115,7 +115,7 @@ public class MovieDAO extends DBContext {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Movie movie = new Movie();
-                movie.setMovieId(rs.getInt("MovieID"));
+                movie.setMovieID(rs.getInt("MovieID"));
                 movie.setTitle(rs.getString("Title"));
                 movie.setGenre(rs.getString("Genre"));
                 movie.setDuration(rs.getInt("Duration"));
@@ -137,7 +137,7 @@ public class MovieDAO extends DBContext {
             stmt.setString(1, movie.getTitle());
             stmt.setString(2, movie.getGenre());
             stmt.setInt(3, movie.getDuration());
-            stmt.setDate(4, movie.getReleaseDate());
+            stmt.setDate(4, (Date) movie.getReleaseDate());
             stmt.setString(5, movie.getDescription());
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -155,9 +155,9 @@ public class MovieDAO extends DBContext {
             stmt.setString(1, movie.getTitle());
             stmt.setString(2, movie.getGenre());
             stmt.setInt(3, movie.getDuration());
-            stmt.setDate(4, movie.getReleaseDate());
+            stmt.setDate(4, (Date) movie.getReleaseDate());
             stmt.setString(5, movie.getDescription());
-            stmt.setInt(6, movie.getMovieId());
+            stmt.setInt(6, movie.getMovieID());
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException | ClassNotFoundException ex) {
