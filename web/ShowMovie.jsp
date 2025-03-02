@@ -45,6 +45,11 @@
             .movie-item a:hover {
                 background: #0056b3;
             }
+            .movie-item img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
         </style>
     </head>
     <body>
@@ -60,29 +65,25 @@
                     if (movies != null && !movies.isEmpty()) {
                         for (Movie movie : movies) {
                 %>
-                    <div class="col-md-6 movie-item">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title"><%= movie.getTitle() %></h2>
-                                <p class="card-text"><strong>Genre:</strong> <%= movie.getGenre() %></p>
-                                <p class="card-text"><strong>Duration:</strong> <%= movie.getDuration() %> minutes</p>
-                                <p class="card-text"><strong>Release Date:</strong> <%= movie.getReleaseDate() %></p>
-                                <p class="card-text"><strong>Description:</strong> <%= movie.getDescription() %></p>
-                                <a href="MovieHome.jsp?movieId=<%= movie.getMovieID() %>" class="btn btn-primary">View Details</a>
-                            </div>
+                <div class="col-md-6 movie-item">
+                    <div class="card">
+                        <img src="images/poster/<%= movie.getPoster() %>" class="card-img-top" alt="<%= movie.getTitle() %>">
+                        <div class="card-body">
+                            <h2 class="card-title"><%= movie.getTitle() %></h2>
+                            <p class="card-text"><strong>Release Date:</strong> <%= movie.getReleaseDate() %></p>
                         </div>
                     </div>
+                </div>
                 <%
                         }
                     } else {
                 %>
-                    <p class="col-12">No movies available.</p>
+                <p class="col-12">No movies available.</p>
                 <%
                     }
                 %>
             </div>
         </div>
-        <!-- Bootstrap JS and dependencies -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
