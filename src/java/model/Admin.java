@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
-/**
- *
- * @author tovie
- */
+
 public class Admin {
-    private int adminId;
+    private int adminID;
     private String name;
     private String email;
     private String password;
@@ -17,19 +11,19 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(int adminId, String name, String email, String password) {
-        this.adminId = adminId;
+    public Admin(int adminID, String name, String email, String password) {
+        this.adminID = adminID;
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    public int getAdminId() {
-        return adminId;
+    public int getAdminID() {
+        return adminID;
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
+    public void setAdminID(int adminID) {
+        this.adminID = adminID;
     }
 
     public String getName() {
@@ -55,12 +49,6 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return "Admin{" + "adminId=" + adminId + ", name=" + name + ", email=" + email + ", password=" + password + '}';
-    }
     
     
-
 }
