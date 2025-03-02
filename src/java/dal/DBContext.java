@@ -1,15 +1,4 @@
-package dal;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
-public class DBContext {
-    private final String serverName = "HIUE\\MSSQLSERVER01";
-    private final String dbName = "MovieTicketBooking";
-    private final String portNumber = "1433";
-    private final String instance = ""; 
-    private final String userID = "sa";
-    private final String password = "123";
 
     public Connection getConnection() throws Exception {
         String url;
@@ -36,4 +25,4 @@ public class DBContext {
             e.printStackTrace();
         }
     }
-}
+
