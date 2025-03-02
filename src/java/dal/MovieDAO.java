@@ -1,196 +1,101 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import model.Movie;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import model.Admin;
-
-/**
- *
- * @author Admin
- */
-public class MovieDAO {
-    /**
-     * Retrieves all admins from the database
-     * @return List of Admin objects
-     */
-    public List<Admin> getAllAdmins() {
-        List<Admin> admins = new ArrayList<>();
+public class MovieDAO extends DBContext {
+public List<Movie> getAllMovies() {
+        List<Movie> movies = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Admin";
+            String sql = "SELECT * FROM Movie";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Admin admin = new Admin(
-                        rs.getInt("AdminID"),
-                        rs.getString("Name"),
-                        rs.getString("Email"),
-                        rs.getString("Password")
+                Movie movie = new Movie(
+                        rs.getInt("movieID"),
+                        rs.getString("title"),
+                        rs.getString("genre"),
+                        rs.getInt("duration"),
+                        rs.getDate("releaseDate")
                 );
-                admins.add(admin);
+                movies.add(movie);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return admins;
+        return movies;
     }
 
-    /**
-     * Retrieves an admin by ID
-     * @param id Admin ID
-     * @return Admin object
-     */
-    public Admin getAdminByID(int id) {
+    public Movie getMovieByID(int movieID) {
         try {
-            Admin admin = null;
-            String sql = "SELECT * FROM Admin WHERE AdminID=?";
+            String sql = "SELECT * FROM Movie WHERE movieID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, movieID);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                admin = new Admin(
-                        rs.getInt("AdminID"),
-                        rs.getString("Name"),
-                        rs.getString("Email"),
-                        rs.getString("Password")
+                return new Movie(
+                        rs.getInt("movieID"),
+                        rs.getString("title"),
+                        rs.getString("genre"),
+                        rs.getInt("duration"),
+                        rs.getDate("releaseDate")
                 );
             }
-            return admin;
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    /**
-     * Retrieves an admin by email
-     * @param email Admin email
-     * @return Admin object
-     */
-    public Admin getAdminByEmail(String email) {
-        try {
-            Admin admin = null;
-            String sql = "SELECT * FROM Admin WHERE Email=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                admin = new Admin(
-                        rs.getInt("AdminID"),
-                        rs.getString("Name"),
-                        rs.getString("Email"),
-                        rs.getString("Password")
-                );
-            }
-            return admin;
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+   
 
-    /**
-     * Retrieves an admin by name
-     * @param name Admin name
-     * @return Admin object
-     */
-    public Admin getAdminByName(String name) {
+    public boolean addMovie(Movie movie) {
         try {
-            Admin admin = null;
-            String sql = "SELECT * FROM Admin WHERE Name=?";
+            String sql = "INSERT INTO Movie (title, genre, duration, releaseDate) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                admin = new Admin(
-                        rs.getInt("AdminID"),
-                        rs.getString("Name"),
-                        rs.getString("Email"),
-                        rs.getString("Password")
-                );
-            }
-            return admin;
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    /**
-     * Retrieves an admin by password
-     * @param password Admin password
-     * @return Admin object
-     */
-    public Admin getAdminByPassword(String password) {
-        try {
-            Admin admin = null;
-            String sql = "SELECT * FROM Admin WHERE Password=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, password);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                admin = new Admin(
-                        rs.getInt("AdminID"),
-                        rs.getString("Name"),
-                        rs.getString("Email"),
-                        rs.getString("Password")
-                );
-            }
-            return admin;
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    /**
-     * Updates an admin in the database
-     * @param admin Admin object
-     * @return true if update was successful, false otherwise
-     */
-    public boolean updateAdmin(Admin admin) {
-        try {
-            String sql = "UPDATE Admin SET Name=?, Email=?, Password=? WHERE AdminID=?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, admin.getName());
-            ps.setString(2, admin.getEmail());
-            ps.setString(3, admin.getPassword());
-            ps.setInt(4, admin.getId());
+            ps.setString(1, movie.getTitle());
+            ps.setString(2, movie.getGenre());
+            ps.setInt(3, movie.getDuration());
+            ps.setDate(4, new java.sql.Date(movie.getReleaseDate().getTime()));
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    /**
-     * Deletes an admin from the database
-     * @param id Admin ID
-     * @return true if deletion was successful, false otherwise
-     */
-    public boolean deleteAdmin(int id) {
+    public boolean updateMovie(Movie movie) {
         try {
-            String sql = "DELETE FROM Admin WHERE AdminID=?";
+            String sql = "UPDATE Movie SET title = ?, genre = ?, duration = ?, releaseDate = ? WHERE movieID = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, movie.getTitle());
+            ps.setString(2, movie.getGenre());
+            ps.setInt(3, movie.getDuration());
+            ps.setDate(4, new java.sql.Date(movie.getReleaseDate().getTime()));
+            ps.setInt(5, movie.getMovieID());
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException ex) {
-            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public static void main(String[] args) {
-        AdminDAO dao = new AdminDAO();
-        System.out.println(dao.getAdminByID(1));
+    public boolean deleteMovie(int movieID) {
+        try {
+            String sql = "DELETE FROM Movie WHERE movieID = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, movieID);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
