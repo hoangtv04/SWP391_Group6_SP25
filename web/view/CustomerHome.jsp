@@ -27,6 +27,15 @@
             .movie-item {
                 margin-bottom: 20px;
             }
+            .movie-item .card {
+                border: 2px solid #007bff; /* Add border to the entire card */
+                border-radius: 5px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+            }
+            .movie-item .card:hover {
+                transform: scale(1.05); /* Scale up the card on hover */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+            }
             .movie-item h2 {
                 font-size: 20px;
                 font-weight: bold; /* Make movie title bold */
@@ -57,12 +66,7 @@
                 width: 100%;
                 height: 500px; 
                 object-fit: cover; 
-                border-radius: 5px;
-                border: 2px solid #007bff; 
-                transition: transform 0.3s ease;
-            }
-            .movie-item img:hover {
-                transform: scale(1.05); 
+                border-radius: 5px 5px 0 0; /* Adjust border radius for the top corners */
             }
             .movie-item .card-title {
                 color: #000; /* Set movie title color to black */
@@ -75,6 +79,36 @@
             .movie-item .card-text {
                 font-weight: bold; /* Make release date text bold */
             }
+            .banner {
+                width: 100%;
+                height: 300px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 24px;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                position: relative;
+                overflow: hidden;
+            }
+            .banner img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            .banner img.active {
+                opacity: 1;
+            }
+            .banner img.inactive {
+                opacity: 0;
+            }
         </style>
     </head>
     <body>
@@ -84,6 +118,13 @@
             </div>
         </header>
         <div class="container">
+            <div class="banner">
+                <img src="images banner/banner1.jpg" class="active" alt="Banner 1">
+                <img src="images banner/banner2.jpg" class="inactive" alt="Banner 2">
+                <img src="images banner/banner3.jpg" class="inactive" alt="Banner 3">
+                <img src="images banner/banner4.jpg" class="inactive" alt="Banner 4">
+                <img src="images banner/banner5.jpg" class="inactive" alt="Banner 5">
+            </div>
             <%
                 List<Movie> movies = (List<Movie>) request.getAttribute("movies");
                 if (movies != null && !movies.isEmpty()) {
@@ -124,6 +165,18 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            // JavaScript to rotate the banner images
+            let currentIndex = 0;
+            const banners = document.querySelectorAll('.banner img');
+            setInterval(() => {
+                banners[currentIndex].classList.remove('active');
+                banners[currentIndex].classList.add('inactive');
+                currentIndex = (currentIndex + 1) % banners.length;
+                banners[currentIndex].classList.remove('inactive');
+                banners[currentIndex].classList.add('active');
+            }, 3000); // Change image every 3 seconds
+        </script>
     </body>
 </html>
 
