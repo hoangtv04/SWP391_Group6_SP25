@@ -5,7 +5,11 @@
 
 package controller;
 
+import dal.DBContext;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,17 +35,35 @@ public class RegisterServletController extends HttpServlet {
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             request.setAttribute("address", address);
-            request.getRequestDispatcher("web/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
             return;
         }
 
-        // Simulate successful registration
-        request.setAttribute("successMessage", "Registration successful!");
-        request.setAttribute("username", username);
-        request.setAttribute("email", email);
-        request.setAttribute("phone", phone);
-        request.setAttribute("address", address);
-        request.getRequestDispatcher("web/Login.jsp").forward(request, response);
+        // Insert data into the database
+        try {
+            DBContext dbContext = new DBContext();
+            Connection conn = dbContext.getConnection();
+            String sql = "INSERT INTO users (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setString(3, email);
+            stmt.setString(4, phone);
+            stmt.setString(5, address);
+            stmt.executeUpdate();
+            conn.close();
+
+            request.setAttribute("successMessage", "Registration successful!");
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+            request.setAttribute("phone", phone);
+            request.setAttribute("address", address);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("registerErrorMessage", "An error occurred. Please try again.");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
     }
 
     @Override
