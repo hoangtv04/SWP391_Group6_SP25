@@ -109,6 +109,61 @@
                 }
             });
         });
+
+        document.querySelector('.confirm-booking-button').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = 'confirmBooking';
+
+            const movieId = document.createElement('input');
+            movieId.type = 'hidden';
+            movieId.name = 'movieId';
+            movieId.value = '<%= request.getParameter("movieId") %>';
+            form.appendChild(movieId);
+
+            const movieName = document.createElement('input');
+            movieName.type = 'hidden';
+            movieName.name = 'movieName';
+            movieName.value = '<%= movieName %>';
+            form.appendChild(movieName);
+
+            const cinemaId = document.createElement('input');
+            cinemaId.type = 'hidden';
+            cinemaId.name = 'cinemaId';
+            cinemaId.value = '<%= request.getParameter("cinemaId") %>';
+            form.appendChild(cinemaId);
+
+            const cinemaName = document.createElement('input');
+            cinemaName.type = 'hidden';
+            cinemaName.name = 'cinemaName';
+            cinemaName.value = '<%= cinemaName %>';
+            form.appendChild(cinemaName);
+
+            const screenId = document.createElement('input');
+            screenId.type = 'hidden';
+            screenId.name = 'screenId';
+            screenId.value = '<%= request.getParameter("screenId") %>';
+            form.appendChild(screenId);
+
+            const screenName = document.createElement('input');
+            screenName.type = 'hidden';
+            screenName.name = 'screenName';
+            screenName.value = '<%= screenName %>';
+            form.appendChild(screenName);
+
+            document.querySelectorAll('.seat input:checked').forEach(function(seat) {
+                const seatId = document.createElement('input');
+                seatId.type = 'hidden';
+                seatId.name = 'seatIds';
+                seatId.value = seat.value;
+                form.appendChild(seatId);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+        });
     });
 </script>
 </body>

@@ -20,6 +20,10 @@
         <servlet-name>SelectSeatServlet</servlet-name>
         <servlet-class>controller.SelectSeatServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmBookingServlet</servlet-name>
+        <servlet-class>controller.ConfirmBookingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MovieDetailsServlet</servlet-name>
         <url-pattern>/movieDetails</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>SelectSeatServlet</servlet-name>
         <url-pattern>/selectSeat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmBookingServlet</servlet-name>
+        <url-pattern>/confirmBooking</url-pattern>
     </servlet-mapping>
 </web-app>
