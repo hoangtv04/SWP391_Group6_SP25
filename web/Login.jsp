@@ -29,9 +29,8 @@
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 width: 400px;
                 box-sizing: border-box;
-            }
-            .login-container {
-                margin-right: 20px;
+                display: none; /* Initially hidden */
+                position: relative;
             }
             .login-container h1, .register-container h1 {
                 text-align: center;
@@ -45,7 +44,9 @@
             .login-container input[type="password"],
             .register-container input[type="text"],
             .register-container input[type="password"],
-            .register-container input[type="email"] {
+            .register-container input[type="email"],
+            .register-container input[type="tel"],
+            .register-container input[type="text"] {
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
@@ -72,41 +73,81 @@
                 color: red;
                 text-align: center;
             }
-            .register-container {
+            .button-container {
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                width: 300px;
-                display: none; /* Initially hidden */
             }
-            .register-button {
-                position: absolute;
-                top: 20px;
-                right: 20px;
+            .button-container button {
                 background: #007bff;
                 color: #fff;
                 border: none;
                 border-radius: 5px;
                 padding: 10px 20px;
                 cursor: pointer;
+                margin-left: 10px;
             }
-            .register-button:hover {
+            .button-container button:hover {
                 background: #0056b3;
+            }
+            .close-button {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: transparent;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .close-button:hover {
+                color: #ff0000;
+            }
+            .forgot-password {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+                color: #007bff;
+                text-decoration: none;
+            }
+            .forgot-password:hover {
+                text-decoration: underline;
             }
         </style>
         <script>
-            function toggleRegisterForm() {
+            function showForm(formType) {
+                var loginContainer = document.querySelector('.login-container');
                 var registerContainer = document.querySelector('.register-container');
-                if (registerContainer.style.display === 'none' || registerContainer.style.display === '') {
-                    registerContainer.style.display = 'block';
-                } else {
+                var buttonContainer = document.querySelector('.button-container');
+                
+                if (formType === 'login') {
+                    loginContainer.style.display = 'block';
                     registerContainer.style.display = 'none';
+                } else if (formType === 'register') {
+                    loginContainer.style.display = 'none';
+                    registerContainer.style.display = 'block';
                 }
+                
+                buttonContainer.style.display = 'none';
+            }
+
+            function hideForm() {
+                var loginContainer = document.querySelector('.login-container');
+                var registerContainer = document.querySelector('.register-container');
+                var buttonContainer = document.querySelector('.button-container');
+                
+                loginContainer.style.display = 'none';
+                registerContainer.style.display = 'none';
+                buttonContainer.style.display = 'block';
             }
         </script>
     </head>
     <body>
+        <div class="button-container">
+            <button class="login-button" onclick="showForm('login')">Login</button>
+            <button class="register-button" onclick="showForm('register')">Register</button>
+        </div>
         <div class="login-container">
+            <button class="close-button" onclick="hideForm()">×</button>
             <h1>Login</h1>
             <form action="login" method="post">
                 <label for="username">Username:</label>
@@ -117,6 +158,7 @@
                 
                 <input type="submit" value="Login">
             </form>
+            <a href="#" class="forgot-password">Forgot Password?</a>
             
             <%
                 String errorMessage = (String) request.getAttribute("errorMessage");
@@ -127,8 +169,8 @@
                 }
             %>
         </div>
-        <button class="register-button" onclick="toggleRegisterForm()">Register</button>
         <div class="register-container">
+            <button class="close-button" onclick="hideForm()">×</button>
             <h1>Register</h1>
             <form action="register" method="post">
                 <label for="reg-username">Username:</label>
@@ -139,6 +181,12 @@
                 
                 <label for="reg-email">Email:</label>
                 <input type="email" id="reg-email" name="email" required>
+                
+                <label for="reg-phone">Phone Number:</label>
+                <input type="tel" id="reg-phone" name="phone" required>
+                
+                <label for="reg-address">Address:</label>
+                <input type="text" id="reg-address" name="address" required>
                 
                 <input type="submit" value="Register">
             </form>
