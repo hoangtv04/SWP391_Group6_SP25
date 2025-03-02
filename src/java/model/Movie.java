@@ -17,21 +17,21 @@ public class Movie {
     private int duration;
     private Date releaseDate;
     private String description;
-    private String poster;
+    
 
    
     public Movie() {
     }
 
     
-    public Movie(int movieId, String title, String genre, int duration, Date releaseDate, String description, String poster) {
+    public Movie(int movieId, String title, String genre, int duration, Date releaseDate, String description) {
         this.movieId = movieId;
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.releaseDate = releaseDate;
         this.description = description;
-        this.poster = poster;
+        
     }
 
     
@@ -83,18 +83,16 @@ public class Movie {
         this.description = description;
     }
 
-    public String getPoster() {
-        return poster;
-    }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-
     @Override
     public String toString() {
-        return "Movie{" + "movieId=" + movieId + ", title=" + title + ", genre=" + genre + ", duration=" + duration + ", releaseDate=" + releaseDate + ", description=" + description + ", poster=" + poster + '}';
+        return "Movie{" + "movieId=" + movieId + ", title=" + title + ", genre=" + genre + ", duration=" + duration + ", releaseDate=" + releaseDate + ", description=" + description + '}';
     }
+
+   
+
+   
+
+    
 
     
 }

@@ -29,9 +29,16 @@
             }
             .movie-item h2 {
                 font-size: 20px;
+                font-weight: bold; /* Make movie title bold */
+                color: #000; /* Set movie title color to black */
+            }
+            .movie-item h2:hover {
+                text-decoration: underline; /* Underline on hover */
             }
             .movie-item p {
                 margin: 5px 0;
+                font-size: 16px; /* Adjust font size */
+                color: #555; /* Adjust text color */
             }
             .movie-item a {
                 display: inline-block;
@@ -41,20 +48,32 @@
                 color: #fff;
                 text-decoration: none;
                 border-radius: 5px;
+                transition: background 0.3s ease;
             }
             .movie-item a:hover {
                 background: #0056b3;
             }
             .movie-item img {
                 width: 100%;
-                height: 500px; /* Tăng chiều cao của ảnh */
-                object-fit: cover; /* Đảm bảo ảnh được cắt đúng cách */
+                height: 500px; 
+                object-fit: cover; 
                 border-radius: 5px;
-                border: 2px solid #007bff; /* Thêm viền */
-                transition: transform 0.3s ease; /* Hiệu ứng động */
+                border: 2px solid #007bff; 
+                transition: transform 0.3s ease;
             }
             .movie-item img:hover {
-                transform: scale(1.05); /* Phóng to ảnh khi trỏ vào */
+                transform: scale(1.05); 
+            }
+            .movie-item .card-title {
+                color: #000; /* Set movie title color to black */
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            .movie-item .card-title:hover {
+                text-decoration: underline; /* Underline on hover */
+            }
+            .movie-item .card-text {
+                font-weight: bold; /* Make release date text bold */
             }
         </style>
     </head>
