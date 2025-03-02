@@ -10,9 +10,9 @@ package model;
  */
 public class Customer {
 
-    private int customerId;
+    private int id;
     private String phone;
-    private String customerName;
+    private String name;
     private String password;
     private String email;
     private String address;
@@ -20,21 +20,21 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerId, String phone, String customerName, String password, String email, String address) {
-        this.customerId = customerId;
+    public Customer(int id, String phone, String name, String password, String email, String address) {
+        this.id = id;
         this.phone = phone;
-        this.customerName = customerName;
+        this.name = name;
         this.password = password;
         this.email = email;
         this.address = address;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getId() {
+        return id;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPhone() {
@@ -45,12 +45,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -79,7 +79,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", phone=" + phone + ", customerName=" + customerName + ", password=" + password + ", email=" + email + ", address=" + address + '}';
+        return "Customer{" + "id=" + id + ", phone=" + phone + ", name=" + name + ", password=" + password + ", email=" + email + ", address=" + address + '}';
     }
 
 }

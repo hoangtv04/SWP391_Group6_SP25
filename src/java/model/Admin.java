@@ -9,7 +9,7 @@ package model;
  * @author tovie
  */
 public class Admin {
-    private int adminId;
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -17,19 +17,19 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(int adminId, String name, String email, String password) {
-        this.adminId = adminId;
+    public Admin(int id, String name, String email, String password) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    public int getAdminId() {
-        return adminId;
+    public int getId() {
+        return id;
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -58,9 +58,8 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin{" + "adminId=" + adminId + ", name=" + name + ", email=" + email + ", password=" + password + '}';
+        return "Admin{" + "id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + '}';
     }
     
     
-
 }
