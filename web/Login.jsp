@@ -20,50 +20,90 @@
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
+                position: relative;
             }
-            .login-container {
+            .login-container, .register-container {
                 background: #fff;
                 padding: 20px;
                 border-radius: 5px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                width: 400px; /* Increase the width */
-                box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+                width: 400px;
+                box-sizing: border-box;
             }
-            .login-container h1 {
+            .login-container {
+                margin-right: 20px;
+            }
+            .login-container h1, .register-container h1 {
                 text-align: center;
                 margin-bottom: 20px;
             }
-            .login-container label {
+            .login-container label, .register-container label {
                 display: block;
                 margin-bottom: 5px;
             }
             .login-container input[type="text"],
-            .login-container input[type="password"] {
+            .login-container input[type="password"],
+            .register-container input[type="text"],
+            .register-container input[type="password"],
+            .register-container input[type="email"] {
                 width: 100%;
                 padding: 10px;
                 margin-bottom: 10px;
                 border: 1px solid #ddd;
                 border-radius: 5px;
-                box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+                box-sizing: border-box;
             }
-            .login-container input[type="submit"] {
+            .login-container input[type="submit"],
+            .register-container input[type="submit"] {
                 width: 100%;
                 padding: 10px;
-                background: #007bff; /* Blue color */
+                background: #007bff;
                 color: #fff;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
-                box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+                box-sizing: border-box;
             }
-            .login-container input[type="submit"]:hover {
-                background: #0056b3; /* Darker blue on hover */
+            .login-container input[type="submit"]:hover,
+            .register-container input[type="submit"]:hover {
+                background: #0056b3;
             }
             .error-message {
                 color: red;
                 text-align: center;
             }
+            .register-container {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 300px;
+                display: none; /* Initially hidden */
+            }
+            .register-button {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+            .register-button:hover {
+                background: #0056b3;
+            }
         </style>
+        <script>
+            function toggleRegisterForm() {
+                var registerContainer = document.querySelector('.register-container');
+                if (registerContainer.style.display === 'none' || registerContainer.style.display === '') {
+                    registerContainer.style.display = 'block';
+                } else {
+                    registerContainer.style.display = 'none';
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="login-container">
@@ -86,6 +126,22 @@
             <%
                 }
             %>
+        </div>
+        <button class="register-button" onclick="toggleRegisterForm()">Register</button>
+        <div class="register-container">
+            <h1>Register</h1>
+            <form action="register" method="post">
+                <label for="reg-username">Username:</label>
+                <input type="text" id="reg-username" name="username" required>
+                
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" name="password" required>
+                
+                <label for="reg-email">Email:</label>
+                <input type="email" id="reg-email" name="email" required>
+                
+                <input type="submit" value="Register">
+            </form>
         </div>
     </body>
 </html>

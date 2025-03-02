@@ -24,14 +24,33 @@
             .container {
                 margin-top: 20px;
             }
+            .row {
+                margin-bottom: 20px; /* Add margin to the bottom of each row */
+            }
             .movie-item {
-                margin-bottom: 20px;
+                margin-bottom: 20px; /* Add margin to the bottom of each movie item */
+                border: 2px solid #fff; /* White border */
+                border-radius: 5px;
+                padding: 10px;
+                background-color: #fff;
+                transition: transform 0.3s ease; /* Transition for the entire movie item */
+            }
+            .movie-item:hover {
+                transform: scale(1.05); /* Scale the entire movie item on hover */
             }
             .movie-item h2 {
                 font-size: 20px;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                color: #333;
+                transition: text-decoration 0.3s ease; /* Transition for the underline effect */
+            }
+            .movie-item h2:hover {
+                text-decoration: underline; /* Underline the movie title on hover */
             }
             .movie-item p {
                 margin: 5px 0;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                color: #666;
             }
             .movie-item a {
                 display: inline-block;
@@ -47,41 +66,115 @@
             }
             .movie-item img {
                 width: 100%;
-                height: 500px; /* Tăng chiều cao của ảnh */
-                object-fit: cover; /* Đảm bảo ảnh được cắt đúng cách */
+                height: 500px;
+                object-fit: cover;
                 border-radius: 5px;
-                border: 2px solid #007bff; /* Thêm viền */
-                transition: transform 0.3s ease; /* Hiệu ứng động */
+                transition: transform 0.3s ease; 
             }
-            .movie-item img:hover {
-                transform: scale(1.05); /* Phóng to ảnh khi trỏ vào */
+            .carousel-item img {
+                height: 550px; 
+            }
+            .carousel-indicators li {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: #ffff;
+            }
+            .carousel-indicators .active {
+                background-color: #ffff;
+            }
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                background-size: 100%, 100%;
+                width: 50px;
+                height: 50px;
+            }
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 5%;
+            }
+            .navbar-nav {
+                margin: 0 auto; /* Center the navbar items */
+            }
+            .nav-item {
+                padding: 0 15px; /* Add padding to the navbar items */
+            }
+            .nav-link {
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                color: #333;
+                transition: color 0.3s ease; /* Transition for the color change */
+            }
+            .nav-link:hover {
+                color: #007bff; /* Change color on hover */
+            }
+            .footer {
+                background-color: #636367c6;
+                padding: 40px 0; /* Increase padding */
+                text-align: center;
+                border-top: 1px solid #fafafa;
+                margin-top: 20px;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 20px; /* Increase font size */
+                color: #f9f9f9;
+            }
+            .footer p {
+                margin: 0;
             }
         </style>
     </head>
     <body>
-        <header class="bg-dark text-white text-center py-3">
-            <div class="container">
-                <h1>Show Movies</h1>
+        <!-- Navbar Section -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto"> <!-- Align the navbar items to the right -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+                </form>
             </div>
-        </header>
+        </nav>
 
         <!-- Banner Section -->
-        <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
+        <div id="bannerCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#bannerCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#bannerCarousel" data-slide-to="1"></li>
+                <li data-target="#bannerCarousel" data-slide-to="2"></li>
+                <li data-target="#bannerCarousel" data-slide-to="3"></li>
+                <li data-target="#bannerCarousel" data-slide-to="4"></li>
+            </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/banner/banner1.jpg" class="d-block w-100" alt="Banner 1">
+                    <img src="images banner/banner1.jpg" class="d-block w-100" alt="Banner 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/banner/banner2.jpg" class="d-block w-100" alt="Banner 2">
+                    <img src="images banner/banner2.jpg" class="d-block w-100" alt="Banner 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/banner/banner3.jpg" class="d-block w-100" alt="Banner 3">
+                    <img src="images banner/banner3.jpg" class="d-block w-100" alt="Banner 3">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/banner/banner4.jpg" class="d-block w-100" alt="Banner 4">
+                    <img src="images banner/banner4.jpg" class="d-block w-100" alt="Banner 4">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/banner/banner5.jpg" class="d-block w-100" alt="Banner 5">
+                    <img src="images banner/banner5.jpg" class="d-block w-100" alt="Banner 5">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
@@ -132,6 +225,12 @@
                 }
             %>
         </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>Demo Footer Information: This is a demo website for showing movies. All content is for demonstration purposes only.</p>
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
