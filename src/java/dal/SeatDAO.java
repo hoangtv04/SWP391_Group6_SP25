@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.Movie;
 
 public class SeatDAO extends DBContext {
 
@@ -53,5 +52,47 @@ public class SeatDAO extends DBContext {
             e.printStackTrace();
         }
         return seats;
+    }
+
+    public List<Seat> getSeatsByIds(String[] seatIds) {
+        List<Seat> seats = new ArrayList<>();
+        String sql = "SELECT * FROM Seat WHERE seatID IN (";
+        for (int i = 0; i < seatIds.length; i++) {
+            sql += "?";
+            if (i < seatIds.length - 1) {
+                sql += ",";
+            }
+        }
+        sql += ")";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            for (int i = 0; i < seatIds.length; i++) {
+                ps.setString(i + 1, seatIds[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Seat seat = new Seat();
+                seat.setSeatID(rs.getInt("seatID"));
+                seat.setSeatNumber(rs.getString("seatNumber"));
+                seat.setSeatType(rs.getString("seatType"));
+                seat.setPrice(rs.getDouble("price"));
+                seats.add(seat);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return seats;
+    }
+
+    public void updateSeatStatus(int seatId, String status) {
+        String sql = "UPDATE Seat SET status = ? WHERE seatID = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status);
+            ps.setInt(2, seatId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

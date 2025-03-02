@@ -72,8 +72,6 @@
             <button type="submit" class="confirm-booking-button">Confirm Booking</button>
         </div>
     </form>
-
-
 </div>
 
 <footer class="footer">

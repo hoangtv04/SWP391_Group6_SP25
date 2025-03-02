@@ -129,16 +129,6 @@ nav a:hover {
     background-color: bisque; /* Brighter orange for VIP seats */
 }
 
-.seat input:checked + label {
-    background-color: #ffcc00;
-    color: #fff;
-}
-
-.seat input:checked + label {
-    background-color: #4CAF50; /* Green color for selected seats */
-    color: #fff;
-    border-color: #4CAF50;
-}
 
 .confirm-booking-button-container {
     display: flex;
@@ -161,7 +151,6 @@ nav a:hover {
     border-color: #4CAF50 !important;
     color: #fff;
 }
-
 
 .confirm-booking-button:hover {
     background-color: #e04e2a;
