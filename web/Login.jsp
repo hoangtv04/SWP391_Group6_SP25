@@ -169,9 +169,10 @@
         }
 
         window.onload = function () {
-            var errorMessage = '<%= request.getAttribute("errorMessage") %>';
+            var errorMessage = '<%= session.getAttribute("loginErrorMessage") %>';
             if (errorMessage) {
                 showForm('login');
+                session.removeAttribute("loginErrorMessage");
             }
         }
     </script>
@@ -194,10 +195,13 @@
             <input type="submit" value="Login">
         </form>
         <a href="#" class="forgot-password">Forgot Password?</a>
-        <% String loginErrorMessage = (String) request.getAttribute("errorMessage"); if (loginErrorMessage != null) { %>
+        <% String loginErrorMessage = (String) session.getAttribute("loginErrorMessage"); if (loginErrorMessage != null) { %>
             <p class="error-message">
                 <%= loginErrorMessage %>
             </p>
+            <%
+                session.removeAttribute("loginErrorMessage");
+            %>
         <% } %>
     </div>
     <div class="register-container">
@@ -221,7 +225,7 @@
 
             <input type="submit" value="Register">
         </form>
-        <% String registerErrorMessage = (String) request.getAttribute("errorMessage"); if (registerErrorMessage != null) { %>
+        <% String registerErrorMessage = (String) request.getAttribute("registerErrorMessage"); if (registerErrorMessage != null) { %>
             <p class="error-message"><%= registerErrorMessage %></p>
         <% } %>
         <% String successMessage = (String) request.getAttribute("successMessage"); if (successMessage != null) { %>
