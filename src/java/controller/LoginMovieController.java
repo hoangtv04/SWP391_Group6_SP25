@@ -93,7 +93,7 @@ public class LoginMovieController extends HttpServlet {
             session.setAttribute("admin", admin);
             response.sendRedirect("view/AdminHome.jsp");
         } else {
-            request.setAttribute("errorMessage", "Username or password incorrect");
+            request.setAttribute("message", "Username or password incorrect");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
 
