@@ -63,21 +63,29 @@
                 List<Movie> movies = (List<Movie>) request.getAttribute("movies");
                 if (movies != null && !movies.isEmpty()) {
                     int index = 1;
-                    for (Movie movie : movies) {
+                    for (int i = 0; i < movies.size(); i++) {
+                        if (i % 3 == 0) {
             %>
             <div class="row">
-                <div class="col-md-6 movie-item">
+            <%
+                        }
+            %>
+                <div class="col-md-4 movie-item">
                     <div class="card">
-                        <img src="images poster/phim<%= index %>.jpg" class="card-img-top" alt="<%= movie.getTitle() %>">
+                        <img src="images poster/phim<%= index %>.jpg" class="card-img-top" alt="<%= movies.get(i).getTitle() %>">
                         <div class="card-body">
-                            <h2 class="card-title"><%= movie.getTitle() %></h2>
-                            <p class="card-text"><strong>Release Date:</strong> <%= movie.getReleaseDate() %></p>
+                            <h2 class="card-title"><%= movies.get(i).getTitle() %></h2>
+                            <p class="card-text"><strong>Release Date:</strong> <%= movies.get(i).getReleaseDate() %></p>
                         </div>
                     </div>
                 </div>
-            </div>
             <%
                         index++;
+                        if ((i + 1) % 3 == 0 || i == movies.size() - 1) {
+            %>
+            </div>
+            <%
+                        }
                     }
                 } else {
             %>
