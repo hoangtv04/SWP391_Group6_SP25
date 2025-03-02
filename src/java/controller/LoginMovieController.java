@@ -2,6 +2,7 @@ package controller;
 
 import dal.CustomerDAO;
 import dal.AdminDAO;
+import dal.MovieDAO;
 import model.Customer;
 import model.Admin;
 import java.io.IOException;
@@ -11,8 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Movie;
 
 /**
  * Servlet implementation class LoginMovieController
@@ -60,7 +63,7 @@ public class LoginMovieController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String username = request.getParameter("username");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         CustomerDAO customerDAO = new CustomerDAO();
@@ -81,15 +84,19 @@ public class LoginMovieController extends HttpServlet {
         if (customer != null && customer.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("customer", customer);
-            response.sendRedirect("view/CustomerHome.jsp"); // Redirect to customer dashboard
+            MovieDAO movieDAO = new MovieDAO();
+            List<Movie> movies = movieDAO.getAllMovies();
+            request.setAttribute("movies", movies);
+            request.getRequestDispatcher("view/CustomerHome.jsp").forward(request, response);
         } else if (admin != null && admin.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("admin", admin);
-            response.sendRedirect("view/AdminHome.jsp"); // Redirect to admin dashboard
+            response.sendRedirect("view/AdminHome.jsp");
         } else {
             request.setAttribute("errorMessage", "Username or password incorrect");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
+
     }
 
     /**
