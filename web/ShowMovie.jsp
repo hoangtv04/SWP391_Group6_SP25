@@ -47,7 +47,8 @@
             }
             .movie-item img {
                 width: 100%;
-                height: auto;
+                height: 500px; /* Tăng chiều cao của ảnh */
+                object-fit: cover; /* Đảm bảo ảnh được cắt đúng cách */
                 border-radius: 5px;
             }
         </style>
@@ -71,9 +72,9 @@
                         }
             %>
                 <div class="col-md-4 movie-item">
-                    <div class="card">
+                    <div class="card h-100 d-flex flex-column">
                         <img src="images poster/phim<%= index %>.jpg" class="card-img-top" alt="<%= movies.get(i).getTitle() %>">
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <h2 class="card-title"><%= movies.get(i).getTitle() %></h2>
                             <p class="card-text"><strong>Release Date:</strong> <%= movies.get(i).getReleaseDate() %></p>
                         </div>
