@@ -31,6 +31,21 @@ public class RegisterServletController extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
 
+        // Validate phone number and address
+        if (!phone.matches("\\d{9,10}")) {
+            request.setAttribute("registerErrorMessage", "Phone number incorrect. Please enter again.");
+            request.setAttribute("showRegisterForm", true);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            return;
+        }
+
+        if (address.length() > 255) {
+            request.setAttribute("registerErrorMessage", "Address is too long. Please enter a shorter address.");
+            request.setAttribute("showRegisterForm", true);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            return;
+        }
+
         try {
             Connection conn = new DBContext().getConnection();
             String sql = "INSERT INTO Customer (CustomerName, Password, Email, Phone, Address) VALUES (?, ?, ?, ?, ?)";
@@ -42,13 +57,15 @@ public class RegisterServletController extends HttpServlet {
             ps.setString(5, address);
             ps.executeUpdate();
 
-            // Set success message and redirect to login page
-            request.setAttribute("successMessage", "Registration successful. Please login.");
-            request.getRequestDispatcher("view/CustomerHome.jsp").forward(request, response);
+            // Set success message and forward to Login.jsp
+            request.setAttribute("successMessage", "Register Successful. Please Login");
+            request.setAttribute("showRegisterForm", true);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Registration failed. Please try again.");
-            request.getRequestDispatcher("view/CustomerHome.jsp").forward(request, response);
+            request.setAttribute("registerErrorMessage", "Registration failed. Please try again.");
+            request.setAttribute("showRegisterForm", true);
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
 
@@ -61,7 +78,6 @@ public class RegisterServletController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

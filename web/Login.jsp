@@ -143,6 +143,16 @@
                 registerContainer.style.display = 'none';
                 buttonContainer.style.display = 'block';
             }
+
+            window.onload = function() {
+                var showRegisterForm = <%= request.getAttribute("showRegisterForm") != null ? "true" : "false" %>;
+                var errorMessage = <%= request.getAttribute("errorMessage") != null ? "true" : "false" %>;
+                if (showRegisterForm) {
+                    showForm('register');
+                } else if (errorMessage) {
+                    showForm('login');
+                }
+            }
         </script>
     </head>
     <body>
@@ -171,12 +181,6 @@
                 <p class="error-message"><%= errorMessage %></p>
             <%
                 }
-                String successMessage = (String) request.getAttribute("successMessage");
-                if (successMessage != null) {
-            %>
-                <p class="success-message"><%= successMessage %></p>
-            <%
-                }
             %>
         </div>
         <div class="register-container">
@@ -200,6 +204,22 @@
                 
                 <input type="submit" value="Register">
             </form>
+            <%
+                String registerErrorMessage = (String) request.getAttribute("registerErrorMessage");
+                if (registerErrorMessage != null) {
+            %>
+                <p class="error-message"><%= registerErrorMessage %></p>
+            <%
+                }
+            %>
+            <%
+                String successMessage = (String) request.getAttribute("successMessage");
+                if (successMessage != null) {
+            %>
+                <p class="success-message"><%= successMessage %></p>
+            <%
+                }
+            %>
         </div>
     </body>
 </html>
