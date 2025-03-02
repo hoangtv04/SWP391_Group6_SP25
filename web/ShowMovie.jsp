@@ -59,30 +59,34 @@
             </div>
         </header>
         <div class="container">
+            <%
+                List<Movie> movies = (List<Movie>) request.getAttribute("movies");
+                if (movies != null && !movies.isEmpty()) {
+                    int index = 1;
+                    for (Movie movie : movies) {
+            %>
             <div class="row">
-                <%
-                    List<Movie> movies = (List<Movie>) request.getAttribute("movies");
-                    if (movies != null && !movies.isEmpty()) {
-                        for (Movie movie : movies) {
-                %>
                 <div class="col-md-6 movie-item">
                     <div class="card">
-                        <img src="images/poster/<%= movie.getPoster() %>" class="card-img-top" alt="<%= movie.getTitle() %>">
+                        <img src="images poster/phim<%= index %>.jpg" class="card-img-top" alt="<%= movie.getTitle() %>">
                         <div class="card-body">
                             <h2 class="card-title"><%= movie.getTitle() %></h2>
                             <p class="card-text"><strong>Release Date:</strong> <%= movie.getReleaseDate() %></p>
                         </div>
                     </div>
                 </div>
-                <%
-                        }
-                    } else {
-                %>
-                <p class="col-12">No movies available.</p>
-                <%
-                    }
-                %>
             </div>
+            <%
+                        index++;
+                    }
+                } else {
+            %>
+            <div class="row">
+                <p class="col-12">No movies available.</p>
+            </div>
+            <%
+                }
+            %>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

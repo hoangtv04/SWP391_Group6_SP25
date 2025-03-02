@@ -14,25 +14,27 @@ public class Movie {
     private int movieId;
     private String title;
     private String genre;
-    private int duration; // Duration in minutes
+    private int duration;
     private Date releaseDate;
     private String description;
+    private String poster;
 
-    // Default constructor
+   
     public Movie() {
     }
 
-    // Parameterized constructor
-    public Movie(int movieId, String title, String genre, int duration, Date releaseDate, String description) {
+    
+    public Movie(int movieId, String title, String genre, int duration, Date releaseDate, String description, String poster) {
         this.movieId = movieId;
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.releaseDate = releaseDate;
         this.description = description;
+        this.poster = poster;
     }
 
-    // Getters and Setters
+    
     public int getMovieID() {
         return movieId;
     }
@@ -81,9 +83,17 @@ public class Movie {
         this.description = description;
     }
 
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
     @Override
     public String toString() {
-        return "Movie{" + "movieId=" + movieId + ", title=" + title + ", genre=" + genre + ", duration=" + duration + ", releaseDate=" + releaseDate + ", description=" + description + '}';
+        return "Movie{" + "movieId=" + movieId + ", title=" + title + ", genre=" + genre + ", duration=" + duration + ", releaseDate=" + releaseDate + ", description=" + description + ", poster=" + poster + '}';
     }
 
     
