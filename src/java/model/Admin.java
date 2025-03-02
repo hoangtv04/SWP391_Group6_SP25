@@ -3,7 +3,6 @@ package model;
 
 
 public class Admin {
-    private int adminID;
     private String name;
     private String email;
     private String password;
@@ -11,19 +10,11 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(int adminID, String name, String email, String password) {
-        this.adminID = adminID;
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    public int getAdminID() {
-        return adminID;
-    }
-
-    public void setAdminID(int adminID) {
-        this.adminID = adminID;
     }
 
     public String getName() {

@@ -3,7 +3,6 @@ package model;
 
 import java.util.Date;
 
-
     private String title;
     private String genre;
     private int duration;
@@ -15,7 +14,6 @@ import java.util.Date;
         this.duration = duration;
         this.releaseDate = releaseDate;
         this.description = description;
-
     }
 
     public String getTitle() {
@@ -57,4 +55,3 @@ import java.util.Date;
     public void setDescription(String description) {
         this.description = description;
     }
-
