@@ -170,9 +170,12 @@
 
         window.onload = function () {
             var errorMessage = '<%= session.getAttribute("loginErrorMessage") %>';
+            var successMessage = '<%= request.getAttribute("successMessage") %>';
             if (errorMessage) {
                 showForm('login');
                 session.removeAttribute("loginErrorMessage");
+            } else if (successMessage) {
+                showForm('register');
             }
         }
     </script>
@@ -225,9 +228,6 @@
 
             <input type="submit" value="Register">
         </form>
-        <% String registerErrorMessage = (String) request.getAttribute("registerErrorMessage"); if (registerErrorMessage != null) { %>
-            <p class="error-message"><%= registerErrorMessage %></p>
-        <% } %>
         <% String successMessage = (String) request.getAttribute("successMessage"); if (successMessage != null) { %>
             <p class="success-message"><%= successMessage %></p>
         <% } %>

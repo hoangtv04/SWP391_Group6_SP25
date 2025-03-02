@@ -43,7 +43,7 @@ public class RegisterServletController extends HttpServlet {
         try {
             DBContext dbContext = new DBContext();
             Connection conn = dbContext.getConnection();
-            String sql = "INSERT INTO users (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Customer (CustomerName, Password, Email, Phone, Address) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.setString(2, password);
