@@ -73,6 +73,10 @@
                 color: red;
                 text-align: center;
             }
+            .success-message {
+                color: green;
+                text-align: center;
+            }
             .button-container {
                 position: absolute;
                 top: 20px;
@@ -167,6 +171,12 @@
                 <p class="error-message"><%= errorMessage %></p>
             <%
                 }
+                String successMessage = (String) request.getAttribute("successMessage");
+                if (successMessage != null) {
+            %>
+                <p class="success-message"><%= successMessage %></p>
+            <%
+                }
             %>
         </div>
         <div class="register-container">
@@ -183,10 +193,10 @@
                 <input type="email" id="reg-email" name="email" required>
                 
                 <label for="reg-phone">Phone Number:</label>
-                <input type="tel" id="reg-phone" name="phone" required>
+                <input type="tel" id="reg-phone" name="phone" required maxlength="15">
                 
                 <label for="reg-address">Address:</label>
-                <input type="text" id="reg-address" name="address" required>
+                <input type="text" id="reg-address" name="address" required maxlength="255">
                 
                 <input type="submit" value="Register">
             </form>
